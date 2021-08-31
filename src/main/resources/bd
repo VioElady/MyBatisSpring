@@ -1,0 +1,148 @@
+create database shopmee;
+create table customer
+(
+    id       bigserial not null
+        constraint customer_pkey
+            primary key,
+    email    varchar(255),
+    password varchar(255),
+    username varchar(255)
+        constraint uk_irnrrncatp2fvw52vp45j7rlw
+            unique
+);
+
+alter table customer
+    owner to postgres;
+
+
+
+create table products
+(
+    id          bigint not null
+        constraint products_pkey
+            primary key,
+    description varchar(255),
+    price       double precision,
+    title       varchar(255),
+    customer_id bigint
+        constraint fksu77w85kis17ny28x5pli9mvn
+            references customer
+);
+
+alter table products
+    owner to postgres;
+
+
+create table assessments
+(
+    likes       boolean,
+    customer_id bigint not null
+        constraint fkllrc9pbu8imuensd1ppwem37j
+            references customer,
+    product_id  bigint not null
+        constraint fk1fijxgtya4u4wybwfby9lphl7
+            references products,
+    constraint assessments_pkey
+        primary key (customer_id, product_id)
+);
+
+alter table assessments
+    owner to postgres;
+
+
+-- //
+
+INSERT INTO customer (email, password, username)
+VALUES ('violina@gmail', 'Vio.1999', 'Vio');
+
+INSERT INTO customer (email, password, username)
+VALUES ('alex@gmail', 'Alex.1999', 'Alex');
+
+INSERT INTO customer (email, password, username)
+VALUES ('stas@gmail', 'Stas.1999', 'Stas');
+
+-- //
+INSERT INTO products (id, description, price, title, customer_id)
+VALUES (1, 'good', 55, 'milk', 1);
+
+INSERT INTO products (id, description, price, title, customer_id)
+VALUES (2, 'bad', 58, 'chess', 3);
+
+INSERT INTO products (id, description, price, title, customer_id)
+VALUES (3, 'good', 14, 'banana', 1);
+
+INSERT INTO products (id, description, price, title, customer_id)
+VALUES (4, 'better', 14, 'orange', 1);
+
+INSERT INTO products (id, description, price, title, customer_id)
+VALUES (5, 'good', 34, 'caffe', 3);
+
+INSERT INTO products (id, description, price, title, customer_id)
+VALUES (6, 'bad', 55, 'latte', 2);
+
+
+---///
+select *
+from customer;
+select *
+from products;
+select *
+from assessments;
+
+
+INSERT INTO assessments (likes, customer_id, product_id)
+VALUES (true, 1, 3);
+
+INSERT INTO assessments (likes, customer_id, product_id)
+VALUES (true, 1, 2);
+
+INSERT INTO assessments (likes, customer_id, product_id)
+VALUES (true, 1, 4);
+
+
+---------////like////
+
+SELECT *
+FROM products
+WHERE customer_id = 2
+  AND id = 3;
+
+---if products = null, next step
+---if products != null, return eroare
+
+
+SELECT *
+FROM assessments
+WHERE customer_id = 2
+  AND product_id = 3;
+
+---if likes = true ; return eroare
+--- if likes = false;
+
+UPDATE assessments
+SET likes = TRUE
+WHERE likes = FALSE
+  AND customer_id = 2
+  AND product_id = 3;
+
+----if assessments = null
+INSERT INTO assessments (likes, customer_id, product_id)
+VALUES (true, 3, 2);
+
+
+
+------////disLike///
+
+
+--if likes = true
+
+UPDATE assessments
+SET likes = FALSE
+WHERE likes = TRUE
+  AND customer_id = 2
+  AND product_id = 3;
+
+
+---- if assessments = null
+INSERT INTO assessments(likes, customer_id, product_id)
+VALUES (false, 2, 2)
