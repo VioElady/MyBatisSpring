@@ -32,7 +32,7 @@ public class AssessmentsService {
         Customer customer = customerService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
         if (product.isPresent()) {
-            if (product.get().getCustomer().getId().equals(customer.getId())) {
+            if (product.get().getCustomerId().equals(customer.getId())) {
                 throw new ProductNotFoundException("The product belongs to you, don't appreciate it.", INTERNAL_SERVER_ERROR);
             }
             {

@@ -62,7 +62,7 @@ public class ProductService {
         isPresent(product);
         Product toBeDelete = product.get();
         Customer customer = customerService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        if (toBeDelete.getCustomer().getId() == customer.getId()) {
+        if (toBeDelete.getCustomerId() == customer.getId()) {
             productMapper.deleteById(id);
         } else
             throw new DataBaseException("Data Source issue, could not delete product", INTERNAL_SERVER_ERROR);
@@ -82,7 +82,7 @@ public class ProductService {
 
         Product toBeUpdated = receivedProduct.get();
         Customer customer = customerService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        if (toBeUpdated.getCustomer().getId() == customer.getId()) {
+        if (toBeUpdated.getCustomerId() == customer.getId()) {
             toBeUpdated.setTitle(productDto.getTitle());
             toBeUpdated.setPrice(productDto.getPrice());
             toBeUpdated.setDescription(productDto.getDescription());

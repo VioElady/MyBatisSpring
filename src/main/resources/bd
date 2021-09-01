@@ -14,23 +14,21 @@ create table customer
 alter table customer
     owner to postgres;
 
+    create table products
+    (
+        id          bigserial not null
+            constraint products_pkey
+                primary key,
+        description varchar(255),
+        price       double precision,
+        title       varchar(255),
+        customer_id bigint
+            constraint fksu77w85kis17ny28x5pli9mvn
+                references customer
+    );
 
-
-create table products
-(
-    id          bigint not null
-        constraint products_pkey
-            primary key,
-    description varchar(255),
-    price       double precision,
-    title       varchar(255),
-    customer_id bigint
-        constraint fksu77w85kis17ny28x5pli9mvn
-            references customer
-);
-
-alter table products
-    owner to postgres;
+    alter table products
+        owner to postgres;
 
 
 create table assessments

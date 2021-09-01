@@ -1,12 +1,8 @@
 package com.example.mybatis.demo.model;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import javax.persistence.*;
 
-
 @Data
-@Entity
 @Table(name = "products")
 
 public class Product {
@@ -18,9 +14,7 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Long customerId;
-
-
-    private Customer customer;
+   // private Customer customer;
 
     @Column(name = "title")
     private String title;
@@ -30,8 +24,4 @@ public class Product {
 
     @Column(name = "price")
     private double price;
-
-//    @JsonProperty(value = "customer_id")
-//     private Long customerId;
-
 }
