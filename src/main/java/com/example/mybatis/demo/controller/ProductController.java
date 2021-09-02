@@ -42,7 +42,6 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
-
     @GetMapping("/user")
     public ResponseEntity<List<ProductDto>> getProductForUser() throws DataBaseException {
         return new ResponseEntity<>(productService.getAllProductsForUser(), HttpStatus.OK);

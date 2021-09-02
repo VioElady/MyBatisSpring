@@ -1,5 +1,6 @@
 package com.example.mybatis.demo.model;
 
+import lombok.Builder;
 import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,4 +14,5 @@ public class AssessmentID implements Serializable {
 
     @Column(name = "customer_id")
     private Long customerId;
+
 }

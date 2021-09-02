@@ -2,6 +2,7 @@ package com.example.mybatis.demo.service;
 
 import com.example.mybatis.demo.converter.ProductConverter;
 import com.example.mybatis.demo.exceptionhandling.ProductNotFoundException;
+import com.example.mybatis.demo.model.AssessmentID;
 import com.example.mybatis.demo.model.Assessments;
 import com.example.mybatis.demo.model.Customer;
 import com.example.mybatis.demo.model.Product;
@@ -37,6 +38,7 @@ public class AssessmentsService {
             }
             {
                 Assessments assessments = new Assessments();
+                //assessments.setId(AssessmentID.builder().productId(productId).customerId(customer.getId()).build());
                 assessments.setProduct(product.get());
                 assessments.setCustomer(customer);
                 assessments.setLikes(likes);

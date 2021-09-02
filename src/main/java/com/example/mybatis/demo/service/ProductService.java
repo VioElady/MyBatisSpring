@@ -54,12 +54,14 @@ public class ProductService {
     public List<ProductDto> getAllProductsForUser() throws DataBaseException {
         List<Product> products;
         try {
-            products = productMapper.findProductsByCustomer(customerService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+            Customer customer = customerService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+            products = productMapper.findProductsByCustomer(customer.getId());
         } catch (Exception e) {
             throw new DataBaseException("Data base issue!", INTERNAL_SERVER_ERROR);
         }
         return converter.modelToDTO(products);
     }
+
 
     public void deleteProduct(Long id) throws DataBaseException, ProductNotFoundException {
         Optional<Product> product = productMapper.findById(id);
@@ -92,9 +94,8 @@ public class ProductService {
             toBeUpdated.setDescription(productDto.getDescription());
         } else
             throw new ProductNotFoundException("Product not found!", INTERNAL_SERVER_ERROR);
-        productMapper.save(toBeUpdated);
+        productMapper.update(toBeUpdated);
     }
-
 
     private void isPresent(Optional<Product> optionalProduct) throws ProductNotFoundException {
         if (optionalProduct.isPresent()) {

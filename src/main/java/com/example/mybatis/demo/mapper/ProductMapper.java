@@ -13,8 +13,8 @@ public interface ProductMapper  {
     @Select("select id,description,title,price,customer_id as customerId from products where id = #{id}")
     Optional<Product> findById(Long id);
 
-    @Select("select id,name,price,user_id as userId from products where username = #{username}")
-    List<Product> findProductsByCustomer(Customer findUserByUsername);
+    @Select("select id,title,price,description,customer_id as customerId from products where customer_id = #{customerId}")
+    List<Product> findProductsByCustomer(Long id);
 
     @Delete("delete from products where id = #{id}")
     void deleteById(Long id);
@@ -28,5 +28,8 @@ public interface ProductMapper  {
 
     @Select("select id,title,description,price,customer_id as customerId from products")
     Page<Product> findByPage();
+
+    @Select("update products set title=#{title}, price=#{price},description=#{description} where id = #{id}")
+    void update(Product product);
 
 }
