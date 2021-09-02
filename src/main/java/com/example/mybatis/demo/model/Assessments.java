@@ -11,11 +11,11 @@ public class Assessments {
     private AssessmentID id = new AssessmentID();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("productId")
+    @MapsId("product_id")
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("customerId")
+    @MapsId("customer_id")
     private Customer customer;
 
     @Column(name = "likes")
