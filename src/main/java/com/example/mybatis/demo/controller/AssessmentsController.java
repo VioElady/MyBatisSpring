@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RequiredArgsConstructor
+@RequestMapping("/api/products")
 @Api
 @Validated
 @RestController
-@RequestMapping("")
 
 public class AssessmentsController {
 

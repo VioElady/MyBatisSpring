@@ -1,23 +1,12 @@
 package com.example.mybatis.demo.model;
-import javax.persistence.*;
-import lombok.Data;
 
+import lombok.Data;
 @Data
-@Entity
-@Table(name = "assessments")
 public class Assessments {
 
-    @EmbeddedId
-    private AssessmentID id = new AssessmentID();
+    private Long productId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("product_id")
-    private Product product;
+    private Long customerId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("customer_id")
-    private Customer customer;
-
-    @Column(name = "likes")
     private Boolean likes;
 }
