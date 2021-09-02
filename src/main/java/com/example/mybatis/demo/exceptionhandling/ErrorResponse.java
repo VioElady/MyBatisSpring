@@ -1,6 +1,9 @@
 package com.example.mybatis.demo.exceptionhandling;
 
+import lombok.Getter;
+
 import java.util.Date;
+@Getter
 
 public class ErrorResponse {
     private String message;
@@ -11,11 +14,4 @@ public class ErrorResponse {
         this.time = new Date();
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public Date getTime() {
-        return time;
-    }
 }

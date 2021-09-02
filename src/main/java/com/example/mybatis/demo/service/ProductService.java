@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +53,7 @@ public class ProductService {
     public List<ProductDto> getAllProductsForUser() throws DataBaseException {
         List<Product> products;
         try {
-            Customer customer = customerService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+            Customer customer = customerService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
             products = productMapper.findProductsByCustomer(customer.getId());
         } catch (Exception e) {
             throw new DataBaseException("Data base issue!", INTERNAL_SERVER_ERROR);
@@ -67,7 +66,7 @@ public class ProductService {
         Optional<Product> product = productMapper.findById(id);
         isPresent(product);
         Product toBeDelete = product.get();
-        Customer customer = customerService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        Customer customer = customerService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         if (toBeDelete.getCustomerId() == customer.getId()) {
             productMapper.deleteById(id);
         } else
@@ -77,7 +76,7 @@ public class ProductService {
     public void addProduct(ProductDto productDto) {
         validateProduct(productDto);
         Product product = converter.dtoToModel(productDto);
-        product.setCustomerId(customerService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).getId());
+        product.setCustomerId(customerService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).getId());
         productMapper.save(product);
     }
 
@@ -87,7 +86,7 @@ public class ProductService {
         validateProduct(productDto);
 
         Product toBeUpdated = receivedProduct.get();
-        Customer customer = customerService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        Customer customer = customerService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         if (toBeUpdated.getCustomerId() == customer.getId()) {
             toBeUpdated.setTitle(productDto.getTitle());
             toBeUpdated.setPrice(productDto.getPrice());

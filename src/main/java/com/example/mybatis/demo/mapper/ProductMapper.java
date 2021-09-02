@@ -1,6 +1,5 @@
 package com.example.mybatis.demo.mapper;
 
-import com.example.mybatis.demo.model.Customer;
 import com.example.mybatis.demo.model.Product;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.*;
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Mapper
-public interface ProductMapper  {
+public interface ProductMapper {
     @Select("select id,description,title,price,customer_id as customerId from products where id = #{id}")
     Optional<Product> findById(Long id);
 

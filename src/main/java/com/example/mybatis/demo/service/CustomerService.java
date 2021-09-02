@@ -36,7 +36,7 @@ public class CustomerService {
                 .build();
     }
 
-    public Customer FindUserByUsername (String username) throws UsernameNotFoundException {
-        return (Customer) customerMapper.findByUsername(username);
+    public Customer findUserByUsername(String username) throws UsernameNotFoundException {
+        return customerMapper.findByUsername(username);
     }
 }

@@ -1,12 +1,13 @@
 package com.example.mybatis.demo.model;
 
 import lombok.*;
+
 import javax.persistence.*;
 
 
 @Getter
 @Setter
-@Table(name = "customer",uniqueConstraints = {
+@Table(name = "customer", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email")})
 @Builder
